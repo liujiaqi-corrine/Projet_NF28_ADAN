@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Projet_NF28</string>
+    <string name="ADAN_explique">Agent des artistes numérique</string>
+    <string name="CommenceChoix">CommenceChoix</string>
+    <string name="ADAN">ADAN</string>
+    <string name="Connexion_Inscription">Connexion / Inscription</string>
+    <string name="ChoixRole">Choix Role</string>
+    <string name="ExpliqueChangeRole">Pouvoir changer ou ajouter l\'autre role apres</string>
+    <string name="Commence">Commence</string>
+    <string name="Connexion">Connexion</string>
+    <string name="NumOuEmail">Numéro Adan / email :</string>
+    <string name="EntrezMot">Entrez ...</string>
+    <string name="Mdp">Mot de passe :</string>
+    <string name="InscriptionArtiste">Inscription Artiste</string>
+    <string name="Nom">Votre Nom</string>
+    <string name="Prenom">Votre Prenom</string>
+    <string name="AdresseEmail">Adresse Email</string>
+    <string name="Profession">Profession</string>
+    <string name="Niveau">Niveau</string>
+    <string name="CV">CV</string>
+    <string name="LesOeuvre">Les Oeuvre</string>
+    <string name="Debutant">Debutant</string>
+    <string name="Amateur">Amateur</string>
+    <string name="Professionnelle">Professionnelle</string>
+    <string name="Type">Type</string>
+    <string name="Entreprise">Entreprise</string>
+    <string name="OrganisateursDeSpectacles">Organisateurs de spectacles</string>
+    <string name="Collectivites">Collectivites</string>
+    <string name="Particuliers">Particuliers</string>
+    <string name="Certificat">Certificat</string>
+    <string name="OK">OK</string>
+    <string name="Retour">Retour</string>
+    <string name="Connect">Connect</string>
+    <string name="Annonce">Annonce</string>
+    <string name="EspacePerso">Espace Personnelle</string>
+    <string name="DesArtistes">Des Artistes</string>
+    <string name="DesOffres">Des Offres</string>
+
+</resources>

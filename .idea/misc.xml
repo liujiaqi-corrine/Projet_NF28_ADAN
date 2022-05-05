@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/annonces.xml" value="0.264" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/choix_inscription_connnexion.xml" value="0.176" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/choix_type_inscription.xml" value="0.4" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/connexion.xml" value="0.144" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/insciption_employeur.xml" value="0.2" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/inscription_artiste.xml" value="0.264" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/treelist_item.xml" value="0.10989583333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
