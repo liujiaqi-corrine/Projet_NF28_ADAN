@@ -12,13 +12,13 @@
     <string name="EntrezMot">Entrez ...</string>
     <string name="Mdp">Mot de passe :</string>
     <string name="InscriptionArtiste">Inscription Artiste</string>
-    <string name="Nom">Votre Nom</string>
-    <string name="Prenom">Votre Prenom</string>
-    <string name="AdresseEmail">Adresse Email</string>
+    <string name="Nom">Nom</string>
+    <string name="Prenom">Prenom</string>
+    <string name="AdresseEmail">Email</string>
     <string name="Profession">Profession</string>
     <string name="Niveau">Niveau</string>
     <string name="CV">CV</string>
-    <string name="LesOeuvre">Les Oeuvre</string>
+    <string name="LesOeuvre">Oeuvre</string>
     <string name="Debutant">Debutant</string>
     <string name="Amateur">Amateur</string>
     <string name="Professionnelle">Professionnelle</string>
@@ -35,5 +35,25 @@
     <string name="EspacePerso">Espace Personnelle</string>
     <string name="DesArtistes">Des Artistes</string>
     <string name="DesOffres">Des Offres</string>
+    <string name="InfoArtiste">Info Artiste</string>
+    <string name="InfoOffre">Info Offre</string>
+    <string name="Contact">Contact</string>
+    <string name="Plus">Plus</string>
+    <string name="Email">Email</string>
+    <string name="Portable">Portable</string>
+    <string name="MessagerieADAN">Messagerie ADAN (rien)</string>
+    <string name="TitreOffre">Titre Offre</string>
+    <string name="Adresse">Adresse</string>
+    <string name="Sujet">Sujet</string>
+    <string name="Description">Description</string>
+    <string name="SalairePossible">SalairePossible</string>
+    <string name="Duree">Duree</string>
+    <string name="NbCandidate">Nombre Candidate</string>
+    <string name="Offre">Offre</string>
+    <string name="Postuler">Postuler</string>
+    <string name="Annuler">Annuler</string>
+    <string name="EspacePersonelle">Espace Personnelle</string>
+    <string name="InfoPersonnelle">Info Personnelle</string>
+    <string name="MesOffres">Mes Offres</string>
 
 </resources>

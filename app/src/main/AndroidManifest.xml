@@ -42,6 +42,26 @@
             android:name=".Connexion"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".InfoPersonne"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".InfoContact"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".InfoOffre"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".EspacePerso"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".InfoPersoSelf"
+            android:exported="true">
+        </activity>
 
     </application>
 

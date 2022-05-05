@@ -6,15 +6,14 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Connexion extends AppCompatActivity {
-
+public class InfoOffre extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.connexion);
+        setContentView(R.layout.info_offre);
     }
 
-    public void OkAAnnonces(View view) {
+    public void retourAnnonce(View view) {
         Intent intent = new Intent(this, Annonces.class);
         startActivity(intent);
     }
