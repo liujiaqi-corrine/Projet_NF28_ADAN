@@ -19,6 +19,7 @@
     <string name="Niveau">Niveau</string>
     <string name="CV">CV</string>
     <string name="LesOeuvre">Oeuvre</string>
+    <string name="RedigerContrat">Rediger Contrat</string>
     <string name="Debutant">Debutant</string>
     <string name="Amateur">Amateur</string>
     <string name="Professionnelle">Professionnelle</string>
@@ -46,7 +47,7 @@
     <string name="Adresse">Adresse</string>
     <string name="Sujet">Sujet</string>
     <string name="Description">Description</string>
-    <string name="SalairePossible">SalairePossible</string>
+    <string name="SalairePossible">D\'Argent Possible</string>
     <string name="Duree">Duree</string>
     <string name="NbCandidate">Nombre Candidate</string>
     <string name="Offre">Offre</string>
@@ -55,5 +56,12 @@
     <string name="EspacePersonelle">Espace Personnelle</string>
     <string name="InfoPersonnelle">Info Personnelle</string>
     <string name="MesOffres">Mes Offres</string>
+    <string name="AjouterRole">Atoujer Role</string>
+    <string name="Artiste">Artiste</string>
+    <string name="Employeur">Employeur</string>
+    <string name="Emploi">Emploi</string>
+    <string name="Prestation">Prestation</string>
+    <string name="ChoixCandiate">Choix Candiate</string>
+    <string name="ListCandidate">List Candidate</string>
 
 </resources>

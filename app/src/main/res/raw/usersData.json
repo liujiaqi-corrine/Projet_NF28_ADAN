@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1 ,
+    "name":"A",
+    "candidate": [
+      "Offre1",
+      "Offre2",
+      "Offre3"
+    ],
+    "adresse":{
+      "street":"Rue Roger Couttolenc",
+      "city":"Compiegne"
+    }
+  },
+  {
+    "id": 2 ,
+    "name":"B",
+    "candidate": [
+      "Offre2",
+      "Offre4"
+    ],
+    "adresse":{
+      "street":"UTC",
+      "city":"Compiegne"
+    }
+  }
+
+]

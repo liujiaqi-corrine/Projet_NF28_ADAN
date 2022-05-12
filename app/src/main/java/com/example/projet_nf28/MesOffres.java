@@ -3,6 +3,7 @@ package com.example.projet_nf28;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,16 +21,36 @@ public class MesOffres extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mes_offres);
+        init();
     }
 
     private void init(){
         mAdapter1 = new MyAdapter(mList1, this);
         mListView1 = findViewById(R.id.listView1);
         mListView1.setAdapter(mAdapter1);
+        mListView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Log.i(TAG, "Position=" + position);
+
+                // Fait Planter le SmartPhone
+                //String item = (String)parent.getItemAtPosition(position);
+                //String  item = ((TextView)view).getText().toString();
+
+                //Toast.makeText(getApplicationContext(), "Test"+position, Toast.LENGTH_SHORT).show();
+                String nomOffre="";
+                AModifierOffre(nomOffre);
+            }
+        });
     }
 
-    public void RtrAAnnonce(View view) {
-        Intent intent = new Intent(this, Annonces.class);
+    public void AModifierOffre(String nomInfo){
+        Intent intent = new Intent(this, ModifierUnOffre.class);
+        startActivity(intent);
+    }
+
+    public void RtrAEspacePerso(View view) {
+        Intent intent = new Intent(this, EspacePerso.class);
         startActivity(intent);
     }
 }

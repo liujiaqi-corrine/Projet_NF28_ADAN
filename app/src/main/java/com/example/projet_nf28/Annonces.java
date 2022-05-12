@@ -97,7 +97,7 @@ public class Annonces extends AppCompatActivity {
 
     public void changepanel_OA(View view){
         mListView1.setVisibility(View.VISIBLE);
-        mListView2.setVisibility(View.GONE);
+        //mListView2.setVisibility(View.GONE);
         b1.setTextColor(getResources().getColor(R.color.black));
         b2.setTextColor(getResources().getColor(R.color.white));
     }

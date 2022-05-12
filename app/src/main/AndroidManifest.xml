@@ -62,7 +62,42 @@
             android:name=".InfoPersoSelf"
             android:exported="true">
         </activity>
-
+        <activity
+            android:name=".ChoixAjouteRole"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".DetailleDeMesOffre"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".AjouteArtiste"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".AjouteEmployeur"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ChoixCandidateOffre"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".MesOffres"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".ModifierUnOffre"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".AjouteUnOffre"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".RedigerContrat"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>
