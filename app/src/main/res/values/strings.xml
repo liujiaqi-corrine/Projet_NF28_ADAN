@@ -12,6 +12,7 @@
     <string name="EntrezMot">Entrez ...</string>
     <string name="Mdp">Mot de passe :</string>
     <string name="InscriptionArtiste">Inscription Artiste</string>
+    <string name="InscriptionEmployer">Inscription Employer</string>
     <string name="Nom">Nom</string>
     <string name="Prenom">Prenom</string>
     <string name="AdresseEmail">Email</string>
@@ -47,7 +48,7 @@
     <string name="Adresse">Adresse</string>
     <string name="Sujet">Sujet</string>
     <string name="Description">Description</string>
-    <string name="SalairePossible">D\'Argent Possible</string>
+    <string name="SalairePossible">D\'Argent Possible(euro)</string>
     <string name="Duree">Duree</string>
     <string name="NbCandidate">Nombre Candidate</string>
     <string name="Offre">Offre</string>
@@ -63,5 +64,6 @@
     <string name="Prestation">Prestation</string>
     <string name="ChoixCandiate">Choix Candiate</string>
     <string name="ListCandidate">List Candidate</string>
+    <string name="Recurrence">Recurrence</string>
 
 </resources>

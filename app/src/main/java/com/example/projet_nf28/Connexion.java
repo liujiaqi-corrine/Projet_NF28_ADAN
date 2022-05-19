@@ -18,7 +18,7 @@ public class Connexion extends AppCompatActivity {
     public void OkAAnnonces(View view) {
         Intent intent = new Intent(this, Annonces.class);
         startActivity(intent);
-        ReadUnUser();
+        /*ReadUnUser();*/
     }
 
 

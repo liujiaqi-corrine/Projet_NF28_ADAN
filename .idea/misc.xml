@@ -6,7 +6,8 @@
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/ajoute_artiste.xml" value="0.136" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/ajoute_employeur.xml" value="0.10989583333333333" />
-        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/ajoute_un_offre.xml" value="0.16799999999999998" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/ajoute_un_offre.xml" value="0.264" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/androidmanifest.xml" value="0.25" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/annonces.xml" value="0.23157894736842105" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/choix_ajoute_role.xml" value="0.2" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/choix_candidate_offre.xml" value="0.144" />
@@ -16,13 +17,13 @@
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/detaille_un_de_mes_offres.xml" value="0.264" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/espace_perso.xml" value="0.264" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/info_contact.xml" value="0.176" />
-        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/info_offre.xml" value="0.4" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/info_offre.xml" value="0.2" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/info_perso_self.xml" value="0.2" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/info_personne.xml" value="0.176" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/insciption_employeur.xml" value="0.2" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/inscription_artiste.xml" value="0.264" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/mes_offres.xml" value="0.264" />
-        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/modifer_un_offre.xml" value="0.176" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/modifer_un_offre.xml" value="0.1" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/rediger_contrat.xml" value="0.16799999999999998" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/treelist_item.xml" value="0.10989583333333333" />
       </map>
