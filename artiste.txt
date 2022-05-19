@@ -1,0 +1,29 @@
+User :
+id* : int
+nom* : string
+prenom* : string
+email* : string
+isArtiste* : bool (int)
+isEmployer* : bool (int)
+
+
+Artiste -> User
+profession* : string
+niveau* :  enum(debutant, amateur, professionnelle)
+cv : ?
+oeuvre : ?
+
+Employer -> User
+type* : enum(Entrprise, Organisation, Collective, Particulier)
+certificat : ?
+
+Offre :
+id : int
+titre* : string
+description : string
+argent : int
+nb_candidate* : int
+recurrence : string
+durre : string
+adresse* : string
+type_offre* : enum(prestation, emploi)
