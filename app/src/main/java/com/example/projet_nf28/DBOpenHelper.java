@@ -16,6 +16,7 @@ import java.util.List;
 public class DBOpenHelper {
     int id=0;
     boolean isEmailOk;
+    boolean idMdpOK;
 
     public static Connection getConn(){
         String ip = "172.25.7.107";//ipconfig IPV4
@@ -97,6 +98,59 @@ public class DBOpenHelper {
         }
         Log.d("verifierEmail4", "isEmailOk : "+ isEmailOk);
         return isEmailOk;
+    }
+
+    public boolean verifierMdp(String email, String mdp){
+        Thread a=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                idMdpOK = true;
+                Connection conn = null;
+                String sql = "select * from user where email ='"+email+"'";
+                Statement st;
+                conn =(Connection) DBOpenHelper.getConn();
+                Log.d("verifierMdp", "ok connect bdd");
+                try {
+                    // creat objet connect
+                    java.sql.Statement statement = conn.createStatement();
+                    Log.d("verifierMdp", "ok creat sql");
+                    // execute sql
+                    ResultSet rSet = statement.executeQuery(sql);
+                    int cpt=0;
+                    while (rSet.next()) {
+                        cpt=cpt+1;
+                        if(mdp.equals(rSet.getString("mdp")) == false){
+                            idMdpOK = false;
+                            Log.e("verifierMdp", "err mdp incorrect "+mdp);
+                            Log.e("verifierMdp", "err mdp incorrect "+rSet.getString("mdp"));
+                        }
+                    }
+                    if(cpt!=1){
+                        idMdpOK = false;
+                        Log.e("verifierMdp", "err nb compte"+cpt);
+                    }
+                } catch (SQLException e) {
+                    Log.e("verifierMdp", "err sql");
+                }
+                //close bdd
+                try {
+                    conn.close();
+                    Log.d("verifierMdp", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.d("verifierMdp", "err close bdd");
+                }
+                Log.d("verifierMdp", "idMdpOK : "+ idMdpOK);
+                return;
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.d("verifierMdp", "idMdpOK : "+ idMdpOK);
+        return idMdpOK;
     }
 
     public boolean addUser(User usr){

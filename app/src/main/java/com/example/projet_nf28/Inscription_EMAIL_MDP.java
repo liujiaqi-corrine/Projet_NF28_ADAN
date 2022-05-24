@@ -34,7 +34,7 @@ public class Inscription_EMAIL_MDP extends AppCompatActivity {
             test=false;
             mdp.setError("case obligatoire");
         }
-        if(isEmailOk==false){
+        if(isEmailOk==false){//email existe
             test=false;
             email.setError("email existe deja");
         }
