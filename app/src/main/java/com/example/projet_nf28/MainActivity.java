@@ -176,13 +176,16 @@ public class MainActivity extends AppCompatActivity{
                 Connection conn = null;
                 int u = 0;
                 conn =(Connection) DBOpenHelper.getConn();
-                String sql = "insert into user (nom, prenom) values(?,?)";
+                //String sql = "insert into user (nom, prenom) values(?,?)";
+                String sql = "insert into user (nom, prenom, email, isArtiste, isEmployer) values(?,?,?,?,?)";
                 PreparedStatement pst;
                 try {
                     pst = (PreparedStatement) conn.prepareStatement(sql);
-                    //将输入的edit框的值获取并插入到数据库中
-                    pst.setString(1,"Test");
+                    pst.setString(1,"");
                     pst.setString(2,"Test2");
+                    pst.setString(3,"Test3@Test");
+                    pst.setInt(4,0);
+                    pst.setInt(5,0);
                     u = pst.executeUpdate();
                     pst.close();
                     conn.close();
@@ -198,4 +201,75 @@ public class MainActivity extends AppCompatActivity{
         startActivity(intent);
     }
 
+    public void Modifer(View view){
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int u = 0;
+                Connection conn = null;
+                conn =(Connection) DBOpenHelper.getConn();
+                String sql = "UPDATE user "+
+                        "SET nom = '" + "A" + "',"+
+                        "prenom = '" + "Aa" + "',"+
+                        "isArtiste = '" + 1 + "',"+
+                        "isEmployer = '" + 0 + "' "+
+                        "WHERE id ='"+27+"'";
+                PreparedStatement pst;
+                try {
+                    pst = (PreparedStatement) conn.prepareStatement(sql);
+                    u = pst.executeUpdate();
+                    pst.close();
+                    Log.d("ModiferUser", "ok sql");
+                } catch (SQLException e) {
+                    Log.e("ModiferUser", "err sql");
+                }
+                try {
+                    conn.close();
+                    Log.d("ModiferUser", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.e("ModiferUser", "err close bdd");
+                }
+            }
+        });
+        a.start();
+    }
+
+    public void addArtiste(View view){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection conn = null;
+                int u = 0;
+                conn =(Connection) DBOpenHelper.getConn();
+                //String sql = "insert into artiste (id, nom, prenom, email, isArtiste, isEmployer, profession, niveau, cv, oeuvre) values(?,?,?,?,?,?,?,?,?,?)";
+                String sql = "insert into artiste (id, nom, prenom, email, isArtiste, isEmployer, profession, niveau, cv, oeuvre) values(?,?,?,?,?,?,?,?,?,?)";
+                PreparedStatement pst;
+                try {
+                    pst = (PreparedStatement) conn.prepareStatement(sql);
+                    pst.setInt(1,17);
+                    pst.setString(2,"AAA");
+                    pst.setString(3,"AAAA");
+                    pst.setString(4,"AAAAA@AAAAA");
+                    pst.setInt(5,1);
+                    pst.setInt(6,0);
+                    pst.setString(7,"AAAAAAA");
+                    pst.setString(8,"Debutant");
+                    pst.setString(9,"");
+                    pst.setString(10,"");
+                    u = pst.executeUpdate();
+                    pst.close();
+                    Log.d("addArtiste","ok sql");
+                } catch (SQLException e) {
+                    Log.e("addArtiste","err sql");
+                }
+
+                try {
+                    conn.close();
+                    Log.d("addArtiste","ok close bdd");
+                } catch (SQLException throwables) {
+                    Log.e("addArtiste","err close bdd");
+                }
+            }
+        }).start();
+    }
 }

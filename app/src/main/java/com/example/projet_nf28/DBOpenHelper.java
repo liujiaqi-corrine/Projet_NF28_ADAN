@@ -31,9 +31,9 @@ public class DBOpenHelper {
         Statement st;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            Log.d("ok", "ok load drive");
+            Log.d("getConn", "ok load drive");
         } catch (ClassNotFoundException e) {
-            Log.d("not ok", "err load drive");
+            Log.d("getConn", "err load drive");
         }
         try {
             conn = DriverManager.getConnection(url, user, password);
@@ -52,7 +52,7 @@ public class DBOpenHelper {
     }
 
     public boolean verifierEmail(String email){
-        new Thread(new Runnable() {
+        Thread a=new Thread(new Runnable() {
             @Override
             public void run() {
                 isEmailOk = true;
@@ -88,42 +88,112 @@ public class DBOpenHelper {
                 Log.d("verifierEmail3", "isEmailOk : "+ isEmailOk);
                 return;
             }
-        }).start();
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Log.d("verifierEmail4", "isEmailOk : "+ isEmailOk);
         return isEmailOk;
     }
 
-    public void addUser(User usr){
-        new Thread(new Runnable() {
+    public boolean addUser(User usr){
+        Thread a = new Thread(new Runnable() {
             @Override
             public void run() {
+                isEmailOk=true;
                 Connection conn = null;
                 int u = 0;
                 conn =(Connection) DBOpenHelper.getConn();
-                String sql = "insert into user (id, nom, prenom, email, isArtiste, isEmployer) values(?,?,?,?,?,?)";
+                String sql = "insert into user (nom, prenom, email, isArtiste, isEmployer, mdp) values(?,?,?,?,?,?)";
                 PreparedStatement pst;
                 try {
                     pst = (PreparedStatement) conn.prepareStatement(sql);
-                    pst.setInt(0,usr.getId());
                     pst.setString(1,usr.getNom());
                     pst.setString(2,usr.getPrenom());
                     pst.setString(3,usr.getEmail());
                     pst.setInt(4,usr.getIsArtiste());
                     pst.setInt(5,usr.getIsEmployer());
+                    pst.setString(6,usr.getMdp());
                     u = pst.executeUpdate();
                     pst.close();
-                    conn.close();
                     Log.d("addUser", "ok sql");
                 } catch (SQLException e) {
                     Log.e("addUser", "err sql");
+                    isEmailOk=false;
+
+                    sql="DELETE FROM user WHERE ID=(SELECT MAX(id) FROM user)";
+                    try {
+                        pst = (PreparedStatement) conn.prepareStatement(sql);
+                        pst.close();
+                        Log.d("addUser", "ok delete duplicate");
+                    } catch (SQLException throwables) {
+                        Log.e("addUser", "err delete duplicate");
+                    }
+
+                }
+                try {
+                    conn.close();
+                    Log.d("addUser", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.e("addUser", "err close bdd");
                 }
             }
-        }).start();
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return isEmailOk;
+    }
+
+    public void ModiferUser(User usr){
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int u=0;
+                isEmailOk=true;
+                Connection conn = null;
+                conn =(Connection) DBOpenHelper.getConn();
+                String sql = "UPDATE user "+
+                        "SET nom = '" + usr.getNom() + "',"+
+                        "prenom = '" + usr.getPrenom() + "',"+
+                        "isArtiste = '" + usr.getIsArtiste() + "',"+
+                        "isEmployer = '" + usr.getIsEmployer() + "' "+
+                        "WHERE id ='"+usr.getId()+"'";
+                PreparedStatement pst;
+                try {
+                    pst = (PreparedStatement) conn.prepareStatement(sql);
+                    u = pst.executeUpdate();
+                    pst.close();
+                    Log.d("ModiferUser", "ok sql");
+                } catch (SQLException e) {
+                    Log.e("ModiferUser", "err sql");
+                }
+                try {
+                    conn.close();
+                    Log.d("ModiferUser", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.e("ModiferUser", "err close bdd");
+                }
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.d("ModiferUser", "fini");
     }
 
     public int findIdUser(String email){
         id=0;
-        new Thread(new Runnable() {
+        Thread a=new Thread(new Runnable() {
             @Override
             public void run() {
                 Connection conn = null;
@@ -137,16 +207,21 @@ public class DBOpenHelper {
                     Log.d("findIdUser", "ok creat sql");
                     // execute sql
                     ResultSet rSet = statement.executeQuery(sql);
-                    // print info
-                    Log.d("findIdUser", "user");
-                    Log.d("findIdUser", "id\t\t\temail\t");
-                    Log.d("findIdUser", rSet.getString("id") + "\t" + rSet.getString("nom")+"\t");
-                    if(rSet.getString("id").isEmpty()==false){
+                    int cpt=0;
+                    while (rSet.next()){
+                        cpt=cpt+1;
+                        Log.d("findIdUser", "user");
+                        Log.d("findIdUser", "id\t\t\temail\t");
+                        Log.d("findIdUser", rSet.getString("id") + "\t");
                         id=Integer.parseInt(rSet.getString("id"));
+                    }
+                    cpt=cpt-1;
+                    // print info
+                    if(cpt==0){
                         Log.d("findIdUser", "email ok");
                     }
                     else{
-                        Log.e("findIdUser", "email inexiste");
+                        Log.e("findIdUser", "email inexiste ou plusieur");
                     }
                 } catch (SQLException e) {
                     Log.e("findIdUser", "err sql");
@@ -160,12 +235,18 @@ public class DBOpenHelper {
                 }
                 return;
             }
-        }).start();
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return id;
     }
 
     public void addArtiste(Artiste art){
-        new Thread(new Runnable() {
+        Thread a = new Thread(new Runnable() {
             @Override
             public void run() {
                 Connection conn = null;
@@ -175,15 +256,14 @@ public class DBOpenHelper {
                 PreparedStatement pst;
                 try {
                     pst = (PreparedStatement) conn.prepareStatement(sql);
-                    pst.setInt(0,art.getId());
-                    pst.setString(1,art.getNom());
-                    pst.setString(2,art.getPrenom());
-                    pst.setString(3,art.getEmail());
-                    pst.setInt(4,art.getIsArtiste());
-                    pst.setInt(5,art.getIsEmployer());
-                    pst.setString(6,art.getProfession());
-                    pst.setString(7,art.getNiveau());
-                    pst.setString(8,art.getPrenom());
+                    pst.setInt(1,art.getId());
+                    pst.setString(2,art.getNom());
+                    pst.setString(3,art.getPrenom());
+                    pst.setString(4,art.getEmail());
+                    pst.setInt(5,art.getIsArtiste());
+                    pst.setInt(6,art.getIsEmployer());
+                    pst.setString(7,art.getProfession());
+                    pst.setString(8,art.getNiveau());
                     if(art.getCv().isEmpty()==false){
                         pst.setString(9,art.getCv());
                     }
@@ -200,9 +280,18 @@ public class DBOpenHelper {
                     pst.close();
                     conn.close();
                 } catch (SQLException e) {
-                    Log.d("addArtiste","err sql");
+                    Log.e("addArtiste","err sql");
                 }
             }
-        }).start();
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.d("addArtiste", "fini");
     }
+
+
 }

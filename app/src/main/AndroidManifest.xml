@@ -102,6 +102,10 @@
             android:name=".RedigerContrat"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".Inscription_EMAIL_MDP"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

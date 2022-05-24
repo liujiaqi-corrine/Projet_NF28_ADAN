@@ -15,7 +15,7 @@ public class ChoixInscriptionConnnexion extends AppCompatActivity {
     }
 
     public void ChoixTypeInscrire(View view) {
-        Intent intent = new Intent(this, ChoixTypeInscription.class);
+        Intent intent = new Intent(this, Inscription_EMAIL_MDP.class);
         startActivity(intent);
     }
 

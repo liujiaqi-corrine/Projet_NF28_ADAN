@@ -7,6 +7,7 @@ public class User {
     String email;
     int isArtiste;
     int isEmployer;
+    String mdp;
 
     public void setId(int id) {
         this.id = id;
@@ -32,6 +33,10 @@ public class User {
         this.prenom = prenom;
     }
 
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
+
     public String getNom() {
         return nom;
     }
@@ -54,5 +59,9 @@ public class User {
 
     public String getPrenom() {
         return prenom;
+    }
+
+    public String getMdp() {
+        return mdp;
     }
 }

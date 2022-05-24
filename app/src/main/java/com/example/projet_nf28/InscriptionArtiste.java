@@ -21,12 +21,16 @@ import androidx.appcompat.app.AppCompatActivity;
 public class InscriptionArtiste extends AppCompatActivity {
     EditText nom;
     EditText prenom;
-    EditText email;
     EditText profession;
+
     RadioGroup niveau;
     EditText cv;
     EditText oeuvre;
     Button buttonSelected;
+
+    String email;
+    String mdp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +38,6 @@ public class InscriptionArtiste extends AppCompatActivity {
 
         nom = (EditText) findViewById(R.id.editTextTextPersonName1);
         prenom = (EditText) findViewById(R.id.editTextTextPersonName2);
-        email = (EditText) findViewById(R.id.editTextTextPersonName3);
         profession = (EditText) findViewById(R.id.editTextTextPersonName4);
         niveau = (RadioGroup) findViewById(R.id.radioGroupe);
         cv = (EditText) findViewById(R.id.editTextTextPersonName5);
@@ -74,20 +77,6 @@ public class InscriptionArtiste extends AppCompatActivity {
             prenom.setError("case obligatoire");
         }
 
-        if(email.getText().toString().isEmpty()){
-            test=false;
-            email.setError("case obligatoire");
-        }
-        else{
-            DBOpenHelper dboh = new DBOpenHelper();
-            boolean isEmailOk = dboh.verifierEmail(email.getText().toString());
-            Log.d("InscriptionArtiste", "isEmailOk : "+ isEmailOk);
-            if(isEmailOk==false){
-                test=false;
-                email.setError("email existe deja");
-            }
-        }
-
         if(profession.getText().toString().isEmpty()){
             test=false;
             profession.setError("case obligatoire");
@@ -104,49 +93,68 @@ public class InscriptionArtiste extends AppCompatActivity {
 
     public void OkAAnnonces(View view) {
         if(valide()){
+            addArtiste();
             Intent intent = new Intent(this, Annonces.class);
             startActivity(intent);
             //enregUNArtisteAJSON();
-            //addArtiste();
+
         }
     }
 
     public void addArtiste(){
+        int id=0;
         DBOpenHelper dboh = new DBOpenHelper();
-        User usr = new User();
-        usr.setId(0);
-        usr.setNom(nom.getText().toString());
-        usr.setNom(prenom.getText().toString());
-        usr.setEmail(email.getText().toString());
-        usr.setIsArtiste(1);
-        usr.setIsEmployer(0);
 
-        dboh.addUser(usr);
+        Intent intent = getIntent();
+        email=intent.getStringExtra("email");
+        mdp=intent.getStringExtra("mdp");
 
-        /*int id=0;
-        id = dboh.findIdUser(email.getText().toString());
+        Log.d("addArtiste:",email+" "+mdp);
 
-        if(id!=0){
+        id = dboh.findIdUser(email);
+
+        if(id>0){
+            User usr = new User();
+            usr.setId(id);
+
+            usr.setNom(nom.getText().toString());
+            usr.setPrenom(prenom.getText().toString());
+            usr.setIsArtiste(1);
+            usr.setIsEmployer(0);
+
+            Log.d("addArtiste id : ", String.valueOf(usr.getId()));
+            Log.d("addArtiste nom : ",usr.getNom());
+            Log.d("addArtiste prenom : ",usr.getPrenom());
+
+            dboh.ModiferUser(usr);
+
             Artiste art = new Artiste(usr);
             art.setId(id);
             buttonSelected = (Button) findViewById(niveau.getCheckedRadioButtonId());
             art.setNiveau(buttonSelected.getText().toString());
             art.setProfession(profession.getText().toString());
-            art.setEmail(email.getText().toString());
+            art.setEmail(email);
+
+            Log.d("addArtiste niveau : ",buttonSelected.getText().toString());
             if(cv.getText().toString().isEmpty()==false){
                 art.setCv(cv.getText().toString());
             }
+            else{
+                art.setCv("");
+            }
             if(oeuvre.getText().toString().isEmpty()==false){
                 art.setOevre(oeuvre.getText().toString());
+            }
+            else{
+                art.setOevre("");
             }
             dboh.addArtiste(art);
             Log.d("InscriptionArtiste","Ok ajouter artiste bdd");
         }
         else{
             Log.e("InscriptionArtiste","impossible à ajouter à bdd");
-        }*/
+        }
     }
-
 
     public void retourDerriere(View view) {
         Intent intent = new Intent(this, ChoixTypeInscription.class);
