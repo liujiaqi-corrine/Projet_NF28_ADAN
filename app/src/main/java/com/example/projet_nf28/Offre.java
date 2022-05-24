@@ -10,6 +10,16 @@ public class Offre {
     String durre;
     String adresse;
     String typeOffre;
+    int author;
+    String candidate;
+
+    public int getAuthor() {
+        return author;
+    }
+
+    public String getCandidate() {
+        return candidate;
+    }
 
     public int getId() {
         return id;
@@ -81,5 +91,13 @@ public class Offre {
 
     public void setTypeOffre(String typeOffre) {
         this.typeOffre = typeOffre;
+    }
+
+    public void setAuthor(int author) {
+        this.author = author;
+    }
+
+    public void setCandidate(String candidate) {
+        this.candidate = candidate;
     }
 }

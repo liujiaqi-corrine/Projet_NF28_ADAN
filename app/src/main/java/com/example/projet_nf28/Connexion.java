@@ -55,6 +55,10 @@ public class Connexion extends AppCompatActivity {
 
     public void OkAAnnonces(View view) {
         if(ValideUser()){
+            DBOpenHelper dboh = new DBOpenHelper();
+            int id = dboh.findIdUser(email.getText().toString());
+            MainActivity.setLoginMemberID(id);
+
             Intent intent = new Intent(this, Annonces.class);
             startActivity(intent);
         }

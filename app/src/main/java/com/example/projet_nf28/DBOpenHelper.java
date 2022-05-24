@@ -389,4 +389,42 @@ public class DBOpenHelper {
         Log.d("addEmployer", "fini");
     }
 
+    public void addOffre(Offre offre){
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection conn = null;
+                int u = 0;
+                conn =(Connection) DBOpenHelper.getConn();
+                String sql = "insert into offre (titre, description, argent, nbCandidate, recurrence, durre, adresse, typeOffre, author, candidate) values(?,?,?,?,?,?,?,?,?,?)";
+                PreparedStatement pst;
+                try {
+                    pst = (PreparedStatement) conn.prepareStatement(sql);
+                    pst.setString(1,offre.getTitre());
+                    pst.setString(2,offre.getDescription());
+                    pst.setInt(3,offre.getArgent());
+                    pst.setInt(4,offre.getNbCandidate());
+                    pst.setString(5,offre.getRecurrence());
+                    pst.setString(6,offre.getDurre());
+                    pst.setString(7,offre.getAdresse());
+                    pst.setString(8,offre.getTypeOffre());
+                    pst.setInt(9,offre.getAuthor());
+                    pst.setString(10,offre.getCandidate());
+                    u = pst.executeUpdate();
+                    pst.close();
+                    conn.close();
+                } catch (SQLException e) {
+                    Log.e("addOffre","err sql");
+                }
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.d("addOffre", "fini");
+    }
+
 }

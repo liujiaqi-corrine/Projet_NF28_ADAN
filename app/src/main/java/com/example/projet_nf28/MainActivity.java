@@ -23,6 +23,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class MainActivity extends AppCompatActivity{
+    static int loginMemberID;
+
+    public static void setLoginMemberID(int loginMemberID) {
+        MainActivity.loginMemberID = loginMemberID;
+    }
+
+    public static int getLoginMemberID() {
+        return loginMemberID;
+    }
 
     private static final int TEST_USER_SELECT = 1;
     int i =0;
@@ -307,5 +316,44 @@ public class MainActivity extends AppCompatActivity{
             e.printStackTrace();
         }
         Log.d("addEmployer", "fini");
+    }
+
+    public void addOffre(View view){
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection conn = null;
+                int u = 0;
+                conn =(Connection) DBOpenHelper.getConn();
+                //String sql = "insert into offre (titre, description, argent, nbCandidate, recurrence, durre, adresse, typeOffre, author, candidate) values(?,?,?,?,?,?,?,?,?,?)";
+                String sql = "insert into offre (titre, description, argent, nbCandidate, recurrence, durre, adresse, typeOffre, author, candidate) values(?,?,?,?,?,?,?,?,?,?)";
+                PreparedStatement pst;
+                try {
+                    pst = (PreparedStatement) conn.prepareStatement(sql);
+                    pst.setString(1,"A");
+                    pst.setString(2,"AAA");
+                    pst.setInt(3,3);
+                    pst.setInt(4,1);
+                    pst.setString(5,"A");
+                    pst.setString(6,"A");
+                    pst.setString(7,"A");
+                    pst.setString(8,"Prestation");
+                    pst.setInt(9,1111);
+                    pst.setString(10,"");
+                    u = pst.executeUpdate();
+                    pst.close();
+                    conn.close();
+                } catch (SQLException e) {
+                    Log.e("addOffre","err sql");
+                }
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.d("addOffre", "fini");
     }
 }

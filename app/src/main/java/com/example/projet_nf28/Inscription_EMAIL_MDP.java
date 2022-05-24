@@ -58,6 +58,9 @@ public class Inscription_EMAIL_MDP extends AppCompatActivity {
             intent.putExtra("email", email.getText().toString());
             intent.putExtra("mdp", mdp.getText().toString());
 
+            int id = dboh.findIdUser(email.getText().toString());
+            MainActivity.setLoginMemberID(id);
+
             startActivity(intent);
 
         }
