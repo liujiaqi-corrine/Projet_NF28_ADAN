@@ -347,5 +347,46 @@ public class DBOpenHelper {
         Log.d("addArtiste", "fini");
     }
 
+    public void addEmployer(Employer emp){
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection conn = null;
+                int u = 0;
+                conn =(Connection) DBOpenHelper.getConn();
+                String sql = "insert into employer (id, nom, prenom, email, isArtiste, isEmployer, type, certificat) values(?,?,?,?,?,?,?,?)";
+                PreparedStatement pst;
+                try {
+                    pst = (PreparedStatement) conn.prepareStatement(sql);
+                    pst.setInt(1,emp.getId());
+                    pst.setString(2,emp.getNom());
+                    pst.setString(3,emp.getPrenom());
+                    pst.setString(4,emp.getEmail());
+                    pst.setInt(5,emp.getIsArtiste());
+                    pst.setInt(6,emp.getIsEmployer());
+                    pst.setString(7,emp.getType());
+                    Log.d("addEmployer",emp.getId()+" "+emp.getNom()+" "+emp.getEmail()+" "+emp.getType());
+                    if(emp.getCertificat().isEmpty()==false){
+                        pst.setString(8,emp.getCertificat());
+                    }
+                    else{
+                        pst.setString(8,"");
+                    }
+                    u = pst.executeUpdate();
+                    pst.close();
+                    conn.close();
+                } catch (SQLException e) {
+                    Log.e("addEmployer","err sql");
+                }
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.d("addEmployer", "fini");
+    }
 
 }

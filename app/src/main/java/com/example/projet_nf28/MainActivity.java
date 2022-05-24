@@ -272,4 +272,40 @@ public class MainActivity extends AppCompatActivity{
             }
         }).start();
     }
+
+    public void addEmployer(View view){
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection conn = null;
+                int u = 0;
+                conn =(Connection) DBOpenHelper.getConn();
+                String sql = "insert into employer (id, nom, prenom, email, isArtiste, isEmployer, type, certificat) values(?,?,?,?,?,?,?,?)";
+                PreparedStatement pst;
+                try {
+                    pst = (PreparedStatement) conn.prepareStatement(sql);
+                    pst.setInt(1,12);
+                    pst.setString(2,"EEE");
+                    pst.setString(3,"Ee");
+                    pst.setString(4,"E@E");
+                    pst.setInt(5,0);
+                    pst.setInt(6,1);
+                    pst.setString(7,"Entreprise");
+                    pst.setString(8,"");
+                    u = pst.executeUpdate();
+                    pst.close();
+                    conn.close();
+                } catch (SQLException e) {
+                    Log.e("addEmployer","err sql");
+                }
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.d("addEmployer", "fini");
+    }
 }

@@ -26,9 +26,9 @@
     <string name="Professionnelle">Professionnelle</string>
     <string name="Type">Type</string>
     <string name="Entreprise">Entreprise</string>
-    <string name="OrganisateursDeSpectacles">Organisateurs de spectacles</string>
+    <string name="OrganisateursDeSpectacles">Organisation</string>
     <string name="Collectivites">Collectivites</string>
-    <string name="Particuliers">Particuliers</string>
+    <string name="Particuliers">Particulier</string>
     <string name="Certificat">Certificat</string>
     <string name="OK">OK</string>
     <string name="Retour">Retour</string>

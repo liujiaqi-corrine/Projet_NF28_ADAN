@@ -71,4 +71,9 @@ public class Connexion extends AppCompatActivity {
         }
     }
 
+    public void retourDerriere(View view) {
+        Intent intent = new Intent(this, ChoixInscriptionConnnexion.class);
+        startActivity(intent);
+    }
+
 }

@@ -53,4 +53,14 @@ public class MesOffres extends AppCompatActivity {
         Intent intent = new Intent(this, EspacePerso.class);
         startActivity(intent);
     }
+
+    public void Ajouter(View view) {
+        Intent intent = new Intent(this, AjouteUnOffre.class);
+        startActivity(intent);
+    }
+
+    public void Supprimer(View view) {
+
+
+    }
 }
