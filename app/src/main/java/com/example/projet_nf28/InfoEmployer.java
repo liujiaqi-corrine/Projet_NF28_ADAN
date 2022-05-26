@@ -7,53 +7,49 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class InfoPersoSelf extends AppCompatActivity {
-    EditText profession;
-    RadioGroup niveau;
-    EditText cv;
-    EditText oeuvre;
+public class InfoEmployer extends AppCompatActivity {
+    RadioGroup type;
+    EditText certificat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.info_perso_self);
+        setContentView(R.layout.info_employer);
 
-        profession = (EditText) findViewById(R.id.editTextTextPersonName4);
-        niveau = (RadioGroup) findViewById(R.id.radioGroupe);
-        cv = (EditText) findViewById(R.id.editTextTextPersonName5);
-        oeuvre = (EditText) findViewById(R.id.editTextTextPersonName6);
+        certificat = (EditText) findViewById(R.id.editTextTextPersonName20);
+        type = (RadioGroup) findViewById(R.id.radioGroupe);
 
         int idPerso = MainActivity.getLoginMemberID();
         if(idPerso!=0){
             DBOpenHelper dboh = new DBOpenHelper();
-            Artiste art = dboh.findUnArtistes(idPerso);
+            Employer emp = dboh.findUnEmployer(idPerso);
             //Toast.makeText(getApplicationContext(), "Test "+idPerso, Toast.LENGTH_SHORT).show();
-            profession.setText(art.getProfession());
-            //'Debutant','Amateur','Professionnelle'
+            certificat.setText(emp.getCertificat());
+            //'Entreprise','Organisation','Collectivites','Particulier'
             RadioButton b;
-            switch (art.getNiveau()){
-                case "Debutant":
+            switch (emp.getType()){
+                case "Entreprise":
                     b= (RadioButton) findViewById(R.id.radioButton);
                     b.setChecked(true);
                     break;
-                case "Amateur":
+                case "Organisation":
+                    b = (RadioButton) findViewById(R.id.radioButton2);
+                    b.setChecked(true);
+                    break;
+                case "Collectivites":
                     b = (RadioButton) findViewById(R.id.radioButton3);
                     b.setChecked(true);
                     break;
-                case "Professionnelle":
-                    b = (RadioButton) findViewById(R.id.radioButton2);
+                case "Particulier":
+                    b = (RadioButton) findViewById(R.id.radioButton4);
                     b.setChecked(true);
                     break;
                 default:
                     break;
             }
-            cv.setText(art.getCv());
-            oeuvre.setText(art.getOevre());
         }
 
     }
@@ -61,9 +57,9 @@ public class InfoPersoSelf extends AppCompatActivity {
     public boolean valide(){
         boolean test = true;
         /*buttonSelected = (RadioButton) findViewById(buttonSelectedId);*/
-        if(profession.getText().toString().isEmpty()){
+        if(certificat.getText().toString().isEmpty()){
             test=false;
-            profession.setError("case obligatoire");
+            certificat.setError("case obligatoire");
         }
         return test;
     }
@@ -73,21 +69,17 @@ public class InfoPersoSelf extends AppCompatActivity {
             Intent intent=getIntent();
             int id = intent.getIntExtra("id",0);
             if(id!=0){
-                Artiste art = new Artiste();
-                art.setId(id);
-                art.setProfession(profession.getText().toString());
-                Button buttonSelected = (Button) findViewById(niveau.getCheckedRadioButtonId());
-                art.setNiveau(buttonSelected.getText().toString());
-                art.setCv(cv.getText().toString());
-                art.setOevre(oeuvre.getText().toString());
+                Employer emp = new Employer();
+                emp.setId(id);
+                emp.setCertificat(certificat.getText().toString());
+                Button buttonSelected = (Button) findViewById(type.getCheckedRadioButtonId());
+                emp.setType(buttonSelected.getText().toString());
                 DBOpenHelper dboh = new DBOpenHelper();
-                dboh.ModiferArtiste(art);
+                dboh.ModiferEmployer(emp);
             }
-
             Intent intent2 = new Intent(this, InfoUser.class);
             startActivity(intent2);
         }
-
     }
 
     public void retourEspacePerso(View view) {

@@ -356,4 +356,56 @@ public class MainActivity extends AppCompatActivity{
         }
         Log.d("addOffre", "fini");
     }
+
+    public void findUnArtistes(View view){
+        Artiste art = new Artiste();
+        Thread a=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection conn = null;
+                String sql = "SELECT * FROM artiste WHERE id='"+1+"'";
+                Statement st;
+                conn =(Connection) DBOpenHelper.getConn();
+                Log.d("findUnArtistes", "ok connect bdd");
+                try {
+                    // creat objet connect
+                    java.sql.Statement statement = conn.createStatement();
+                    Log.d("findUnArtistes", "ok creat sql");
+                    // execute sql
+                    ResultSet rSet = statement.executeQuery(sql);
+                    while (rSet.next()){
+                        art.setId(rSet.getInt("id"));
+                        art.setOevre(rSet.getString("oeuvre"));
+                        art.setCv(rSet.getString("cv"));
+                        art.setEmail(rSet.getString("email"));
+                        art.setNiveau(rSet.getString("niveau"));
+                        art.setProfession(rSet.getString("profession"));
+                        art.setPrenom(rSet.getString("prenom"));
+                        art.setNom(rSet.getString("nom"));
+                        art.setIsEmployer(rSet.getInt("isEmployer"));
+                        art.setIsArtiste(rSet.getInt("isArtiste"));
+                        art.setMdp(rSet.getString("mdp"));
+                    }
+                    Log.d("findUnArtistes",art.getNom());
+
+                } catch (SQLException e) {
+                    Log.e("findUnArtistes", "err sql");
+                }
+                //close bdd
+                try {
+                    conn.close();
+                    Log.d("findUnArtistes", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.d("findUnArtistes", "err close bdd");
+                }
+                return;
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

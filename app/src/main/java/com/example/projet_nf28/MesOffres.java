@@ -15,7 +15,7 @@ import java.util.List;
 public class MesOffres extends AppCompatActivity {
     private ListView mListView1 = null;
     private MyAdapter mAdapter1 = null;
-    private static final List<String> mList1 = new ArrayList<String>(Arrays.asList("Offre 1","Offre 2"));
+    private static final List<String> mList1 = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,13 @@ public class MesOffres extends AppCompatActivity {
     }
 
     private void init(){
+        mList1.clear();
+        DBOpenHelper dboh = new DBOpenHelper();
+        List<Offre> loff = dboh.findOffresAvecAuthors(MainActivity.getLoginMemberID());
+        for(int i=0;i<loff.size();i++){
+            mList1.add(loff.get(i).getId()+":"+loff.get(i).getTitre());
+        }
+
         mAdapter1 = new MyAdapter(mList1, this);
         mListView1 = findViewById(R.id.listView1);
         mListView1.setAdapter(mAdapter1);

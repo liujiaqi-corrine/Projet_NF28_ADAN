@@ -9,6 +9,8 @@ import android.widget.RadioGroup;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
+
 public class AjouteUnOffre extends AppCompatActivity {
     EditText titre;
     EditText description;
@@ -72,6 +74,12 @@ public class AjouteUnOffre extends AppCompatActivity {
     public void SauvegardEtRTrAMesOffres(View view) {
         if(valide()){
             addOffre();
+            Annonces.mList2.clear();
+            DBOpenHelper dboh = new DBOpenHelper();
+            List<Offre> loff = dboh.findOffres();
+            for(int i=0;i<loff.size();i++){
+                Annonces.mList2.add(loff.get(i).getId()+":"+loff.get(i).getTitre());
+            }
             Intent intent = new Intent(this, MesOffres.class);
             startActivity(intent);
         }

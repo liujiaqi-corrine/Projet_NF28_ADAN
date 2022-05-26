@@ -9,6 +9,16 @@ public class User {
     int isEmployer;
     String mdp;
 
+    User(){}
+    User(int id, String nom, String prenom, String email, int isArtiste, int isEmployer){
+        this.id=id;
+        this.nom=nom;
+        this.prenom=prenom;
+        this.email=email;
+        this.isArtiste=isArtiste;
+        this.isEmployer=isEmployer;
+    }
+
     public void setId(int id) {
         this.id = id;
     }

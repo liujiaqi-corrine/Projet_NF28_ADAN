@@ -106,6 +106,14 @@
             android:name=".Inscription_EMAIL_MDP"
             android:exported="true">
         </activity>
+        <activity
+            android:name=".InfoUser"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".InfoEmployer"
+            android:exported="true">
+        </activity>
     </application>
 
 </manifest>

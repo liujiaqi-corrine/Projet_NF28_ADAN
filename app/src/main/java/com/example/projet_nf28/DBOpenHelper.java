@@ -19,7 +19,7 @@ public class DBOpenHelper {
     boolean idMdpOK;
 
     public static Connection getConn(){
-        String ip = "172.25.7.107";//ipconfig IPV4
+        String ip = "10.0.2.2";//""192.168.0.102";//"172.25.7.107";//ipconfig IPV4
         int port = 3306;
         String dbName = "nf28";
         String url = "jdbc:mysql://" + ip + ":" + port + "/" + dbName + "?useUnicode=true&characterEncoding=UTF-8";
@@ -210,7 +210,6 @@ public class DBOpenHelper {
             @Override
             public void run() {
                 int u=0;
-                isEmailOk=true;
                 Connection conn = null;
                 conn =(Connection) DBOpenHelper.getConn();
                 String sql = "UPDATE user "+
@@ -243,6 +242,84 @@ public class DBOpenHelper {
             e.printStackTrace();
         }
         Log.d("ModiferUser", "fini");
+    }
+
+    public void ModiferArtiste(Artiste art){
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int u=0;
+                Connection conn = null;
+                conn =(Connection) DBOpenHelper.getConn();
+                String sql = "UPDATE artiste "+
+                        "SET "+
+                        "profession = '" + art.getProfession() + "',"+
+                        "niveau = '" + art.getNiveau() + "',"+
+                        "cv = '" + art.getCv() + "',"+
+                        "oeuvre = '" + art.getOevre() + "'"+
+                        "WHERE id ='"+art.getId()+"'";
+                PreparedStatement pst;
+                try {
+                    pst = (PreparedStatement) conn.prepareStatement(sql);
+                    u = pst.executeUpdate();
+                    pst.close();
+                    Log.d("ModiferArtiste", "ok sql");
+                } catch (SQLException e) {
+                    Log.e("ModiferArtiste", "err sql");
+                }
+                try {
+                    conn.close();
+                    Log.d("ModiferArtiste", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.e("ModiferArtiste", "err close bdd");
+                }
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.d("ModiferArtiste", "fini");
+    }
+
+    public void ModiferEmployer(Employer emp){
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int u=0;
+                Connection conn = null;
+                conn =(Connection) DBOpenHelper.getConn();
+                String sql = "UPDATE employer "+
+                        "SET "+
+                        "type = '" + emp.getType() + "',"+
+                        "certificat = '" + emp.getCertificat() + "'"+
+                        "WHERE id ='"+emp.getId()+"'";
+                PreparedStatement pst;
+                try {
+                    pst = (PreparedStatement) conn.prepareStatement(sql);
+                    u = pst.executeUpdate();
+                    pst.close();
+                    Log.d("ModiferEmployer", "ok sql");
+                } catch (SQLException e) {
+                    Log.e("ModiferEmployer", "err sql");
+                }
+                try {
+                    conn.close();
+                    Log.d("ModiferEmployer", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.e("ModiferEmployer", "err close bdd");
+                }
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.d("ModiferArtiste", "fini");
     }
 
     public int findIdUser(String email){
@@ -427,4 +504,363 @@ public class DBOpenHelper {
         Log.d("addOffre", "fini");
     }
 
+    public List<Offre> findOffres(){
+        List<Offre> listOffre = new ArrayList<Offre>();
+        Thread a=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection conn = null;
+                String sql = "select * from offre";
+                Statement st;
+                conn =(Connection) DBOpenHelper.getConn();
+                Log.d("findOffres", "ok connect bdd");
+                try {
+                    // creat objet connect
+                    java.sql.Statement statement = conn.createStatement();
+                    Log.d("findOffres", "ok creat sql");
+                    // execute sql
+                    ResultSet rSet = statement.executeQuery(sql);
+                    while (rSet.next()){
+                        Offre of = new Offre();
+                        of.setId(rSet.getInt("id"));
+                        of.setTitre(rSet.getString("titre"));
+                        of.setDescription(rSet.getString("description"));
+                        of.setArgent(rSet.getInt("argent"));
+                        of.setRecurrence(rSet.getString("recurrence"));
+                        of.setNbCandidate(rSet.getInt("nbCandidate"));
+                        of.setDurre(rSet.getString("durre"));
+                        of.setAdresse(rSet.getString("adresse"));
+                        of.setTypeOffre(rSet.getString("typeOffre"));
+                        of.setAuthor(rSet.getInt("author"));
+                        of.setCandidate(rSet.getString("candidate"));
+                        listOffre.add(of);
+                    }
+                } catch (SQLException e) {
+                    Log.e("findOffres", "err sql");
+                }
+                //close bdd
+                try {
+                    conn.close();
+                    Log.d("findOffres", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.d("findOffres", "err close bdd");
+                }
+                return;
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return listOffre;
+    }
+
+    public List<Artiste> findArtistes(){
+        List<Artiste> listArtiste = new ArrayList<Artiste>();
+        Thread a=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection conn = null;
+                String sql = "SELECT * FROM artiste ";
+                Statement st;
+                conn =(Connection) DBOpenHelper.getConn();
+                Log.d("findIdUser", "ok connect bdd");
+                try {
+                    // creat objet connect
+                    java.sql.Statement statement = conn.createStatement();
+                    Log.d("findArtistes", "ok creat sql");
+                    // execute sql
+                    ResultSet rSet = statement.executeQuery(sql);
+                    while (rSet.next()){
+                        Artiste art = new Artiste();
+                        art.setId(rSet.getInt("id"));
+                        art.setOevre(rSet.getString("oeuvre"));
+                        art.setCv(rSet.getString("cv"));
+                        art.setEmail(rSet.getString("email"));
+                        art.setNiveau(rSet.getString("niveau"));
+                        art.setProfession(rSet.getString("profession"));
+                        art.setPrenom(rSet.getString("prenom"));
+                        art.setNom(rSet.getString("nom"));
+                        art.setIsEmployer(rSet.getInt("isEmployer"));
+                        art.setIsArtiste(rSet.getInt("isArtiste"));
+                        art.setMdp(rSet.getString("mdp"));
+                        listArtiste.add(art);
+                    }
+                } catch (SQLException e) {
+                    Log.e("findArtistes", "err sql");
+                }
+                //close bdd
+                try {
+                    conn.close();
+                    Log.d("findArtistes", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.d("findArtistes", "err close bdd");
+                }
+                return;
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return listArtiste;
+    }
+
+    public List<Offre> findOffresAvecAuthors(int AuthorsID){
+        List<Offre> listOffre = new ArrayList<Offre>();
+        Thread a=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection conn = null;
+                String sql = "select * from offre where author='"+AuthorsID+"'";
+                Statement st;
+                conn =(Connection) DBOpenHelper.getConn();
+                Log.d("findOffres", "ok connect bdd");
+                try {
+                    // creat objet connect
+                    java.sql.Statement statement = conn.createStatement();
+                    Log.d("findOffres", "ok creat sql");
+                    // execute sql
+                    ResultSet rSet = statement.executeQuery(sql);
+                    while (rSet.next()){
+                        Offre of = new Offre();
+                        of.setId(rSet.getInt("id"));
+                        of.setTitre(rSet.getString("titre"));
+                        of.setDescription(rSet.getString("description"));
+                        of.setArgent(rSet.getInt("argent"));
+                        of.setRecurrence(rSet.getString("recurrence"));
+                        of.setNbCandidate(rSet.getInt("nbCandidate"));
+                        of.setDurre(rSet.getString("durre"));
+                        of.setAdresse(rSet.getString("adresse"));
+                        of.setTypeOffre(rSet.getString("typeOffre"));
+                        of.setAuthor(rSet.getInt("author"));
+                        of.setCandidate(rSet.getString("candidate"));
+                        listOffre.add(of);
+                    }
+                } catch (SQLException e) {
+                    Log.e("findOffres", "err sql");
+                }
+                //close bdd
+                try {
+                    conn.close();
+                    Log.d("findOffres", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.d("findOffres", "err close bdd");
+                }
+                return;
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return listOffre;
+    }
+
+    public Artiste findUnArtistes(int id){
+        Artiste art = new Artiste();
+        Thread a=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection conn = null;
+                String sql = "SELECT * FROM artiste WHERE id='"+id+"'";
+                Statement st;
+                conn =(Connection) DBOpenHelper.getConn();
+                Log.d("findUnArtistes", "ok connect bdd");
+                try {
+                    // creat objet connect
+                    java.sql.Statement statement = conn.createStatement();
+                    Log.d("findUnArtistes", "ok creat sql");
+                    // execute sql
+                    ResultSet rSet = statement.executeQuery(sql);
+                    while (rSet.next()){
+                        art.setId(rSet.getInt("id"));
+                        art.setOevre(rSet.getString("oeuvre"));
+                        art.setCv(rSet.getString("cv"));
+                        art.setEmail(rSet.getString("email"));
+                        art.setNiveau(rSet.getString("niveau"));
+                        art.setProfession(rSet.getString("profession"));
+                        art.setPrenom(rSet.getString("prenom"));
+                        art.setNom(rSet.getString("nom"));
+                        art.setIsEmployer(rSet.getInt("isEmployer"));
+                        art.setIsArtiste(rSet.getInt("isArtiste"));
+                        art.setMdp(rSet.getString("mdp"));
+                    }
+
+                } catch (SQLException e) {
+                    Log.e("findUnArtistes", "err sql");
+                }
+                //close bdd
+                try {
+                    conn.close();
+                    Log.d("findUnArtistes", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.d("findUnArtistes", "err close bdd");
+                }
+                return;
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return art;
+    }
+
+    public Offre findUnOffres(int id){
+        Offre of=new Offre();
+        Thread a=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection conn = null;
+                String sql = "select * from offre where id='"+id+"'";
+                Statement st;
+                conn =(Connection) DBOpenHelper.getConn();
+                Log.d("findUnOffres", "ok connect bdd");
+                try {
+                    // creat objet connect
+                    java.sql.Statement statement = conn.createStatement();
+                    Log.d("findUnOffres", "ok creat sql");
+                    // execute sql
+                    ResultSet rSet = statement.executeQuery(sql);
+                    while (rSet.next()){
+                        of.setId(rSet.getInt("id"));
+                        of.setTitre(rSet.getString("titre"));
+                        of.setDescription(rSet.getString("description"));
+                        of.setArgent(rSet.getInt("argent"));
+                        of.setRecurrence(rSet.getString("recurrence"));
+                        of.setNbCandidate(rSet.getInt("nbCandidate"));
+                        of.setDurre(rSet.getString("durre"));
+                        of.setAdresse(rSet.getString("adresse"));
+                        of.setTypeOffre(rSet.getString("typeOffre"));
+                        of.setAuthor(rSet.getInt("author"));
+                        of.setCandidate(rSet.getString("candidate"));
+                    }
+                } catch (SQLException e) {
+                    Log.e("findUnOffres", "err sql");
+                }
+                //close bdd
+                try {
+                    conn.close();
+                    Log.d("findUnOffres", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.d("findUnOffres", "err close bdd");
+                }
+                return;
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return of;
+    }
+
+    public User findUnUser(int id){
+        User usr = new User();
+        Thread a=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection conn = null;
+                String sql = "SELECT * FROM user WHERE id='"+id+"'";
+                Statement st;
+                conn =(Connection) DBOpenHelper.getConn();
+                Log.d("findUnUser", "ok connect bdd");
+                try {
+                    // creat objet connect
+                    java.sql.Statement statement = conn.createStatement();
+                    Log.d("findUnUser", "ok creat sql");
+                    // execute sql
+                    ResultSet rSet = statement.executeQuery(sql);
+                    while (rSet.next()){
+                        usr.setId(rSet.getInt("id"));
+                        usr.setEmail(rSet.getString("email"));
+                        usr.setPrenom(rSet.getString("prenom"));
+                        usr.setNom(rSet.getString("nom"));
+                        usr.setIsEmployer(rSet.getInt("isEmployer"));
+                        usr.setIsArtiste(rSet.getInt("isArtiste"));
+                        usr.setMdp(rSet.getString("mdp"));
+                    }
+
+                } catch (SQLException e) {
+                    Log.e("findUnUser", "err sql");
+                }
+                //close bdd
+                try {
+                    conn.close();
+                    Log.d("findUnUser", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.d("findUnUser", "err close bdd");
+                }
+                return;
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return usr;
+    }
+
+    public Employer findUnEmployer(int id){
+        Employer emp = new Employer();
+        Thread a=new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Connection conn = null;
+                String sql = "SELECT * FROM employer WHERE id='"+id+"'";
+                Statement st;
+                conn =(Connection) DBOpenHelper.getConn();
+                Log.d("findUnEmployer", "ok connect bdd");
+                try {
+                    // creat objet connect
+                    java.sql.Statement statement = conn.createStatement();
+                    Log.d("findUnEmployer", "ok creat sql");
+                    // execute sql
+                    ResultSet rSet = statement.executeQuery(sql);
+                    while (rSet.next()){
+                        emp.setId(rSet.getInt("id"));
+                        emp.setEmail(rSet.getString("email"));
+                        emp.setPrenom(rSet.getString("prenom"));
+                        emp.setNom(rSet.getString("nom"));
+                        emp.setIsEmployer(rSet.getInt("isEmployer"));
+                        emp.setIsArtiste(rSet.getInt("isArtiste"));
+                        emp.setMdp(rSet.getString("mdp"));
+                        emp.setType(rSet.getString("type"));
+                        emp.setCertificat(rSet.getString("certificat"));
+                    }
+
+                } catch (SQLException e) {
+                    Log.e("findUnEmployer", "err sql");
+                }
+                //close bdd
+                try {
+                    conn.close();
+                    Log.d("findUnEmployer", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.d("findUnEmployer", "err close bdd");
+                }
+                return;
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return emp;
+    }
 }

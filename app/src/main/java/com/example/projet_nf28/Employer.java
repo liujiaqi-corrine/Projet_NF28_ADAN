@@ -12,6 +12,15 @@ public class Employer extends User{
         this.isArtiste = usr.getIsArtiste();
         this.isEmployer = usr.getIsEmployer();
     }
+    Employer(User usr, String type,String certificat){
+        this.id = usr.getId();
+        this.nom = usr.getNom();
+        this.prenom = usr.getPrenom();
+        this.isArtiste = usr.getIsArtiste();
+        this.isEmployer = usr.getIsEmployer();
+        this.type = type;
+        this.certificat = certificat;
+    }
     public void setType(String type) {
         this.type = type;
     }

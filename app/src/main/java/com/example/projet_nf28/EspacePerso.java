@@ -21,7 +21,7 @@ public class EspacePerso extends AppCompatActivity {
     }
 
     public void AInfoPersoSelf(View view) {
-        Intent intent = new Intent(this, InfoPersoSelf.class);
+        Intent intent = new Intent(this, InfoUser.class);
         startActivity(intent);
     }
 
@@ -35,4 +35,9 @@ public class EspacePerso extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void LogOut(View view) {
+        MainActivity.setLoginMemberID(0);
+        Intent intent = new Intent(this, ChoixInscriptionConnnexion.class);
+        startActivity(intent);
+    }
 }

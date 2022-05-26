@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Annonces extends AppCompatActivity {
@@ -24,8 +25,8 @@ public class Annonces extends AppCompatActivity {
     private ListView mListView2 = null;
     private MyAdapter mAdapter1 = null;
     private MyAdapter mAdapter2 = null;
-    private static final List<String> mList1 = new ArrayList<String>(Arrays.asList("Artiste 1","Artiste 2","Artiste 3"));
-    private static final List<String> mList2 = new ArrayList<String>(Arrays.asList("Offre 1","Offre 2","Offre 3"));
+    public static final List<String> mList1 = new ArrayList<String>();
+    public static final List<String> mList2 = new ArrayList<String>();
     private static final String TAG = "Annonces";
 
     @Override
@@ -37,6 +38,18 @@ public class Annonces extends AppCompatActivity {
     }
 
     private void init(){
+        mList1.clear();
+        mList2.clear();
+        DBOpenHelper dboh = new DBOpenHelper();
+        List<Artiste> lart = dboh.findArtistes();
+        List<Offre> loff = dboh.findOffres();
+        for(int i=0;i<lart.size();i++){
+            mList1.add(lart.get(i).getId()+":"+lart.get(i).getNom()+" "+lart.get(i).getPrenom());
+        }
+        for(int i=0;i<loff.size();i++){
+            mList2.add(loff.get(i).getId()+":"+loff.get(i).getTitre());
+        }
+
         //mList = new ArrayList<>(Arrays.asList(mListData));
         mAdapter1 = new MyAdapter(mList1, this);
         mListView1 = findViewById(R.id.listView1);
@@ -50,9 +63,10 @@ public class Annonces extends AppCompatActivity {
                 //String item = (String)parent.getItemAtPosition(position);
                 //String  item = ((TextView)view).getText().toString();
 
-                //Toast.makeText(getApplicationContext(), "Test"+position, Toast.LENGTH_SHORT).show();
-                List<String> thisInfos = new ArrayList<String>();
-                AInfoPersonne(thisInfos);
+                //Toast.makeText(getApplicationContext(), position + " " + id, Toast.LENGTH_SHORT).show();
+                String obj = (String) mAdapter1.getItem((int)id);
+                AInfoPersonne(obj);
+
             }
         });
 
@@ -70,7 +84,8 @@ public class Annonces extends AppCompatActivity {
                 //String  item = ((TextView)view).getText().toString();
 
                 //Toast.makeText(getApplicationContext(), "Test"+position, Toast.LENGTH_SHORT).show();
-                AInfoOffre(0);
+                String obj = (String) mAdapter2.getItem((int)id);
+                AInfoOffre(obj);
             }
         });
 
@@ -78,13 +93,30 @@ public class Annonces extends AppCompatActivity {
         b2 = findViewById(R.id.button8);//AO
     }
 
-    public void AInfoPersonne(List<String> info){
+    public void AInfoPersonne(String contenu){
         Intent intent = new Intent(this, InfoPersonne.class);
+        Log.d("AInfoPersonne", String.valueOf(extraireId(contenu)));
+        intent.putExtra("idPerso",extraireId(contenu));
         startActivity(intent);
     }
 
-    public void AInfoOffre(int idOffre){
+    public int extraireId(String chaine){
+        int id2p = chaine.indexOf(":");
+        String res = "";
+        if(id2p>0){
+            res = chaine.substring(0, id2p);
+            return Integer.parseInt(res);
+        }
+        else{
+            return -1;
+        }
+
+    }
+
+    public void AInfoOffre(String contenu){
         Intent intent = new Intent(this, InfoOffre.class);
+        Log.d("AInfoPersonne", String.valueOf(extraireId(contenu)));
+        intent.putExtra("idOffre",extraireId(contenu));
         startActivity(intent);
     }
 

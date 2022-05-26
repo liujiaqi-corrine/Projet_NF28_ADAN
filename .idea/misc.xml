@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/drawable/info_user.xml" value="0.1" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/drawable/inscirption_email_mdp.xml" value="0.1045" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/ajoute_artiste.xml" value="0.136" />
@@ -19,9 +20,11 @@
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/detaille_un_de_mes_offres.xml" value="0.264" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/espace_perso.xml" value="0.264" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/info_contact.xml" value="0.176" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/info_employer.xml" value="0.264" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/info_offre.xml" value="0.2" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/info_perso_self.xml" value="0.2" />
-        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/info_personne.xml" value="0.176" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/info_personne.xml" value="0.264" />
+        <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/info_user.xml" value="0.264" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/insciption_employeur.xml" value="0.2" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/inscription_artiste.xml" value="0.264" />
         <entry key="..\:/Users/corri/AndroidStudioProjects/Projet_NF28/app/src/main/res/layout/inscription_email_mdp.xml" value="0.1" />

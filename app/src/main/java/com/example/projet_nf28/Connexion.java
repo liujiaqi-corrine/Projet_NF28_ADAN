@@ -21,9 +21,6 @@ public class Connexion extends AppCompatActivity {
 
         email = (EditText) findViewById(R.id.editTextTextPersonName);
         mdp = (EditText) findViewById(R.id.editTextTextPassword);
-
-
-
     }
 
     public boolean ValideUser(){
@@ -54,6 +51,7 @@ public class Connexion extends AppCompatActivity {
 
 
     public void OkAAnnonces(View view) {
+        Log.d("OkAAnnonces","OK");
         if(ValideUser()){
             DBOpenHelper dboh = new DBOpenHelper();
             int id = dboh.findIdUser(email.getText().toString());

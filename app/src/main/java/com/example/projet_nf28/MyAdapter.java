@@ -39,7 +39,7 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int i) {
-        return null;
+        return data.get(i);
     }
 
     @Override

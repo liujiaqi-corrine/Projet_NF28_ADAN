@@ -14,6 +14,18 @@ public class Artiste extends User{
         this.isArtiste = usr.getIsArtiste();
         this.isEmployer = usr.getIsEmployer();
     }
+    Artiste(User usr,String profession,String niveau,String cv, String oevre){
+        this.id = usr.getId();
+        this.nom = usr.getNom();
+        this.prenom = usr.getPrenom();
+        this.isArtiste = usr.getIsArtiste();
+        this.isEmployer = usr.getIsEmployer();
+        this.profession = profession;
+        this.niveau = niveau;
+        this.cv = cv;
+        this.oevre = oevre;
+    }
+
     public void setCv(String cv) {
         this.cv = cv;
     }
