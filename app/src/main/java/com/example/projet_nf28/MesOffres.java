@@ -2,6 +2,7 @@ package com.example.projet_nf28;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -45,15 +46,31 @@ public class MesOffres extends AppCompatActivity {
                 //String  item = ((TextView)view).getText().toString();
 
                 //Toast.makeText(getApplicationContext(), "Test"+position, Toast.LENGTH_SHORT).show();
-                String nomOffre="";
-                AModifierOffre(nomOffre);
+                String obj = (String) mAdapter1.getItem((int)id);
+                AModifierOffre(obj);
             }
         });
     }
 
-    public void AModifierOffre(String nomInfo){
+    public void AModifierOffre(String contenu){
         Intent intent = new Intent(this, ModifierUnOffre.class);
+        Log.d("AModifierOffre",contenu);
+        intent.putExtra("idOffre",extraireId(contenu));
+        Log.d("AModifierOffre", String.valueOf(extraireId(contenu)));
         startActivity(intent);
+    }
+
+    public int extraireId(String chaine){
+        int id2p = chaine.indexOf(":");
+        String res = "";
+        if(id2p>0){
+            res = chaine.substring(0, id2p);
+            return Integer.parseInt(res);
+        }
+        else{
+            return -1;
+        }
+
     }
 
     public void RtrAEspacePerso(View view) {

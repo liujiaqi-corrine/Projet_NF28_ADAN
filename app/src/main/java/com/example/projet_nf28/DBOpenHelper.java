@@ -205,6 +205,42 @@ public class DBOpenHelper {
         return isEmailOk;
     }
 
+    public void OffreAjouteCandidat(int idOffre, String contenuCandidat){
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int u=0;
+                Connection conn = null;
+                conn =(Connection) DBOpenHelper.getConn();
+                String sql = "UPDATE offre "+
+                        "SET candidate = '" + contenuCandidat + "'"+
+                        "WHERE id ='"+idOffre+"'";
+                PreparedStatement pst;
+                try {
+                    pst = (PreparedStatement) conn.prepareStatement(sql);
+                    u = pst.executeUpdate();
+                    pst.close();
+                    Log.d("OffreAjouteCandidat", "ok sql");
+                } catch (SQLException e) {
+                    Log.e("OffreAjouteCandidat", "err sql");
+                }
+                try {
+                    conn.close();
+                    Log.d("OffreAjouteCandidat", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.e("OffreAjouteCandidat", "err close bdd");
+                }
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.d("OffreAjouteCandidat", "fini");
+    }
+
     public void ModiferUser(User usr){
         Thread a = new Thread(new Runnable() {
             @Override

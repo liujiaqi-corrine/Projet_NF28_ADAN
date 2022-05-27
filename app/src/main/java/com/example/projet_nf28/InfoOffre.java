@@ -1,7 +1,9 @@
 package com.example.projet_nf28;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +22,10 @@ public class InfoOffre extends AppCompatActivity {
     TextView durre;
     TextView adresse;
 
+    int idOffre;
+    Offre off;
+    DBOpenHelper dboh;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +41,11 @@ public class InfoOffre extends AppCompatActivity {
         adresse = (TextView) findViewById(R.id.textView32);
 
         Intent intent = getIntent();
-        int idOffre = intent.getIntExtra("idOffre",0);
+        idOffre = intent.getIntExtra("idOffre",0);
         //Toast.makeText(getApplicationContext(), "Test"+idOffre, Toast.LENGTH_SHORT).show();
+        dboh = new DBOpenHelper();
         if(idOffre!=0){
-            DBOpenHelper dboh = new DBOpenHelper();
-            Offre off = dboh.findUnOffres(idOffre);
+            off = dboh.findUnOffres(idOffre);
             titre.setText(off.getTitre());
             decscription.setText(off.getDescription());
             argent.setText(String.valueOf(off.getArgent()));
@@ -47,6 +53,11 @@ public class InfoOffre extends AppCompatActivity {
             nbCandidate.setText(String.valueOf(off.getNbCandidate()));
             durre.setText(off.getDurre());
             adresse.setText(off.getAdresse());
+        }
+        User usr = dboh.findUnUser(MainActivity.getLoginMemberID());
+        if(usr.getIsArtiste() == 0){
+            b1.setEnabled(false);
+            b1.setBackgroundColor(Color.GRAY);
         }
 
     }
@@ -59,6 +70,30 @@ public class InfoOffre extends AppCompatActivity {
     public void Postuler(View view) {
         if(b1.getText() == "Postuler"){
             b1.setText("Annuler");
+            String candidate = off.getCandidate();
+            Log.d("Postuler", candidate);
+            boolean existe = false;
+            if(candidate.isEmpty()==false){
+                Log.d("Postuler","non vide");
+                String[] split = candidate.split(";");
+                int idself = MainActivity.getLoginMemberID();
+                for (int i=0; i<split.length; i++){
+                    if(idself == Integer.parseInt(split[i])){
+                        existe = true;
+                    }
+                }
+            }
+
+            if(candidate.isEmpty()) {
+                candidate = candidate + MainActivity.getLoginMemberID();
+                dboh.OffreAjouteCandidat(idOffre,candidate);
+            }
+            else if(existe==false){
+                candidate=candidate + ";" + MainActivity.getLoginMemberID();
+                dboh.OffreAjouteCandidat(idOffre,candidate);
+            }
+            Log.d("Postuler",candidate);
+
         }
         else{
             b1.setText("Postuler");
