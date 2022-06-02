@@ -63,15 +63,6 @@ public class Connexion extends AppCompatActivity {
         /*ReadUnUser();*/
     }
 
-    public void ReadUnUser()  {
-        try {
-            Personne user = ReadJSON.readUnePersonneJSONFile(this, 0);
-            Toast.makeText(getApplicationContext(), user.toString(), Toast.LENGTH_SHORT).show();
-        } catch(Exception e)  {
-            Toast.makeText(getApplicationContext(), "err", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
 
     public void retourDerriere(View view) {
         Intent intent = new Intent(this, ChoixInscriptionConnnexion.class);

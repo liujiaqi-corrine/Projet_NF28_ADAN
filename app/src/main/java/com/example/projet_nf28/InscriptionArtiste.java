@@ -45,24 +45,6 @@ public class InscriptionArtiste extends AppCompatActivity {
 
     }
 
-    public void enregUNArtisteAJSON()  {
-        try {
-            StringWriter output = new StringWriter();
-
-            Personne perso = WriteJSON.createArtiste();
-
-
-            WriteJSON.writeJsonStream(output, perso);
-
-            String jsonText = output.toString();
-
-            Toast.makeText(getApplicationContext(), jsonText, Toast.LENGTH_SHORT).show();
-
-        } catch(Exception e)  {
-            Toast.makeText(getApplicationContext(), "err", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
 
     public boolean valide(){
         boolean test = true;
