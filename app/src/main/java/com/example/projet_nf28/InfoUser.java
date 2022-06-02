@@ -46,12 +46,12 @@ public class InfoUser extends AppCompatActivity {
         isArtiste.setText(String.valueOf(usr.getIsArtiste()));
         isEmployer.setText(String.valueOf(usr.getIsEmployer()));
         if(usr.getIsArtiste() == 0){
-            bart.setClickable(false);
-            bart.setHighlightColor(Color.GRAY);
+            bart.setEnabled(false);
+            bart.setBackgroundColor(Color.GRAY);
         }
         if(usr.getIsEmployer() == 0){
-            bemp.setClickable(false);
-            bemp.setHighlightColor(Color.GRAY);
+            bemp.setEnabled(false);
+            bemp.setBackgroundColor(Color.GRAY);
         }
 
 

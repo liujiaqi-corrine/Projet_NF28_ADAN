@@ -1,10 +1,12 @@
 package com.example.projet_nf28;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,11 +19,18 @@ public class MesOffres extends AppCompatActivity {
     private ListView mListView1 = null;
     private MyAdapter mAdapter1 = null;
     private static final List<String> mList1 = new ArrayList<String>();
+    Button b1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mes_offres);
+
+        //pour le moment , on n'a pas cette fonction
+        b1  = (Button) findViewById(R.id.button12);
+        b1.setEnabled(false);
+        b1.setBackgroundColor(Color.GRAY);
+
         init();
     }
 

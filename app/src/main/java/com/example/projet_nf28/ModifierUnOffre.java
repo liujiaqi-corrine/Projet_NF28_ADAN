@@ -34,7 +34,7 @@ public class ModifierUnOffre extends AppCompatActivity {
 
         b1  = (Button) findViewById(R.id.button8);
         b2  = (Button) findViewById(R.id.button6);
-        b3  = (Button) findViewById(R.id.button7);
+        b3  = (Button) findViewById(R.id.button18);
         b4  = (Button) findViewById(R.id.button9);
 
         titre = (EditText) findViewById(R.id.editTextTextPersonName9);
@@ -61,6 +61,18 @@ public class ModifierUnOffre extends AppCompatActivity {
             nbCandidate.setText(String.valueOf(off.getNbCandidate()));
             durre.setText(off.getDurre());
             adresse.setText(off.getAdresse());
+
+            if (off.getCandidate() == "" || off.getCandidate().isEmpty()) {
+                b4.setEnabled(false);
+                b4.setBackgroundColor(Color.GRAY);
+            }
+
+
+
+        }
+        else{
+            b4.setEnabled(false);
+            b4.setBackgroundColor(Color.GRAY);
         }
 
         int id = MainActivity.getLoginMemberID();
@@ -72,10 +84,13 @@ public class ModifierUnOffre extends AppCompatActivity {
             b4.setBackgroundColor(Color.GRAY);
         }
 
-        if(user.getIsArtiste() == 0){
-            b3.setEnabled(false);
-            b3.setBackgroundColor(Color.GRAY);
-        }
+        //pour le moment, on n'a pas cette fonction
+        b3.setEnabled(false);
+        b3.setBackgroundColor(Color.GRAY);
+
+        b2.setEnabled(false);
+        b2.setBackgroundColor(Color.GRAY);
+
     }
 
 

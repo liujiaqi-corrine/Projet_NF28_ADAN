@@ -23,6 +23,7 @@ public class EspacePerso extends AppCompatActivity {
         b3  = (Button) findViewById(R.id.button3);
         b4  = (Button) findViewById(R.id.button15);
 
+
         int id = MainActivity.getLoginMemberID();
         DBOpenHelper dboh =  new DBOpenHelper();
         User user =  dboh.findUnUser(id);
@@ -36,6 +37,8 @@ public class EspacePerso extends AppCompatActivity {
                 b4.setBackgroundColor(Color.GRAY);
             }
         }
+
+
 
     }
 
