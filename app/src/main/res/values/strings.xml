@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">Projet_NF28</string>
-    <string name="ADAN_explique">Agent des artistes numérique</string>
+    <string name="ADAN_explique">Agent des artistes</string>
     <string name="CommenceChoix">CommenceChoix</string>
     <string name="ADAN">ADAN</string>
     <string name="Connexion_Inscription">Connexion / Inscription</string>
     <string name="ChoixRole">Choix Role</string>
-    <string name="ExpliqueChangeRole">Pouvoir changer ou ajouter l\'autre role apres</string>
-    <string name="Commence">Commence</string>
+    <string name="ExpliqueChangeRole">Vous pourrez changer ou ajouter l\'autre role par la suite</string>
+    <string name="Commence">Commencer</string>
     <string name="Connexion">Connexion</string>
     <string name="NumOuEmail">Numéro Adan / email :</string>
     <string name="EntrezMot">Entrez ...</string>
@@ -23,7 +23,7 @@
     <string name="RedigerContrat">Rediger Contrat</string>
     <string name="Debutant">Debutant</string>
     <string name="Amateur">Amateur</string>
-    <string name="Professionnelle">Professionnelle</string>
+    <string name="Professionnelle">Professionnel</string>
     <string name="Type">Type</string>
     <string name="Entreprise">Entreprise</string>
     <string name="OrganisateursDeSpectacles">Organisation</string>
@@ -34,11 +34,11 @@
     <string name="Retour">Retour</string>
     <string name="Connect">Connect</string>
     <string name="Annonce">Annonce</string>
-    <string name="EspacePerso">Espace Personnelle</string>
+    <string name="EspacePerso">Espace Personnel</string>
     <string name="DesArtistes">Des Artistes</string>
     <string name="DesOffres">Des Offres</string>
-    <string name="InfoArtiste">Info Artiste</string>
-    <string name="InfoOffre">Info Offre</string>
+    <string name="InfoArtiste">Infos Artiste</string>
+    <string name="InfoOffre">Infos Offre</string>
     <string name="Contact">Contact</string>
     <string name="Plus">Plus</string>
     <string name="Email">Email</string>
@@ -50,20 +50,20 @@
     <string name="Description">Description</string>
     <string name="SalairePossible">D\'Argent Possible(euro)</string>
     <string name="Duree">Duree</string>
-    <string name="NbCandidate">Nombre Candidate</string>
+    <string name="NbCandidate">Nombre Candidats</string>
     <string name="Offre">Offre</string>
     <string name="Postuler">Postuler</string>
     <string name="Annuler">Annuler</string>
-    <string name="EspacePersonelle">Espace Personnelle</string>
-    <string name="InfoPersonnelle">Info Personnelle</string>
+    <string name="EspacePersonelle">Espace Personnel</string>
+    <string name="InfoPersonnelle">Infos Perso</string>
     <string name="MesOffres">Mes Offres</string>
     <string name="AjouterRole">Atoujer Role</string>
     <string name="Artiste">Artiste</string>
     <string name="Employeur">Employeur</string>
     <string name="Emploi">Emploi</string>
     <string name="Prestation">Prestation</string>
-    <string name="ChoixCandiate">Choix Candiate</string>
-    <string name="ListCandidate">List Candidate</string>
+    <string name="ChoixCandiate">Choix Candiats</string>
+    <string name="ListCandidate">Liste Candidats</string>
     <string name="Recurrence">Recurrence</string>
 
 </resources>
