@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class InfoPersonne extends AppCompatActivity {
+public class InfoArtiste extends AppCompatActivity {
     TextView nom;
     TextView prenom;
     TextView profession;
@@ -20,7 +20,7 @@ public class InfoPersonne extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.info_personne);
+        setContentView(R.layout.info_artiste);
 
 
         nom = (TextView) findViewById(R.id.textView14);
@@ -47,9 +47,13 @@ public class InfoPersonne extends AppCompatActivity {
 
     }
 
-    public void retourAnnonce(View view) {
-        Intent intent = new Intent(this, Annonces.class);
+    public void retourChoisirCandidate(View view) {
+        Intent intent1 = getIntent();
+        int idOffre = intent1.getIntExtra("idOffre",0);
+        Intent intent = new Intent(this, ChoisirCandidate.class);
+        intent.putExtra("idOffre",idOffre);
         startActivity(intent);
     }
 
 }
+

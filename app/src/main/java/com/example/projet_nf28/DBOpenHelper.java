@@ -212,9 +212,18 @@ public class DBOpenHelper {
                 int u=0;
                 Connection conn = null;
                 conn =(Connection) DBOpenHelper.getConn();
-                String sql = "UPDATE offre "+
-                        "SET candidate = '" + contenuCandidat + "'"+
-                        "WHERE id ='"+idOffre+"'";
+                String sql="";
+                if(contenuCandidat=="null"){
+                    sql = "UPDATE offre "+
+                            "SET candidate = ''"+
+                            "WHERE id ='"+idOffre+"'";
+                }
+                else{
+                    sql = "UPDATE offre "+
+                            "SET candidate = '" + contenuCandidat + "'"+
+                            "WHERE id ='"+idOffre+"'";
+                }
+
                 PreparedStatement pst;
                 try {
                     pst = (PreparedStatement) conn.prepareStatement(sql);
@@ -239,6 +248,51 @@ public class DBOpenHelper {
             e.printStackTrace();
         }
         Log.d("OffreAjouteCandidat", "fini");
+    }
+
+    public void ModiferOffre(Offre off){
+        Thread a = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int u=0;
+                Connection conn = null;
+                conn =(Connection) DBOpenHelper.getConn();
+                String sql = "UPDATE offre "+
+                        "SET titre = '" + off.getTitre() + "',"+
+                        "description = '" + off.getDescription() + "',"+
+                        "argent = '" + off.getArgent() + "',"+
+                        "nbCandidate = '" + off.getNbCandidate() + "',"+
+                        "recurrence = '" + off.getRecurrence() + "',"+
+                        "durre = '" + off.getDurre() + "',"+
+                        "adresse = '" + off.getAdresse() + "',"+
+                        "typeOffre = '" + off.getTypeOffre() + "',"+
+                        "author = '" + off.getAuthor() + "',"+
+                        "candidate = '" + off.getCandidate() + "' "+
+                        "WHERE id ='"+off.getId()+"'";
+                PreparedStatement pst;
+                try {
+                    pst = (PreparedStatement) conn.prepareStatement(sql);
+                    u = pst.executeUpdate();
+                    pst.close();
+                    Log.d("ModiferOffre", "ok sql");
+                } catch (SQLException e) {
+                    Log.e("ModiferOffre", "err sql");
+                }
+                try {
+                    conn.close();
+                    Log.d("ModiferOffre", "ok close bdd");
+                } catch (SQLException e) {
+                    Log.e("ModiferOffre", "err close bdd");
+                }
+            }
+        });
+        a.start();
+        try {
+            a.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.d("ModiferUser", "fini");
     }
 
     public void ModiferUser(User usr){

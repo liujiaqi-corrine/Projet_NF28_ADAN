@@ -68,35 +68,66 @@ public class InfoOffre extends AppCompatActivity {
     }
 
     public void Postuler(View view) {
-        if(b1.getText() == "Postuler"){
+        int idself = MainActivity.getLoginMemberID();
+        if(b1.getText().toString() == "Postuler"){
             b1.setText("Annuler");
+            String candidate = off.getCandidate();
+            Log.d("Postuler", candidate);
+            boolean existe = false;
+            if(candidate.isEmpty()==false && candidate!=""){
+                String res="";
+                Log.d("Postuler","non vide");
+                String[] split = candidate.split(";");
+
+                for (int i=0; i<split.length; i++){
+                    if(idself != Integer.parseInt(split[i])){
+                        res+=split[i]+";";
+                    }
+                }
+                res=res + String.valueOf(idself);
+                Log.d("candidate Choix1",res);
+                dboh.OffreAjouteCandidat(idOffre,res);
+                Log.d("Place1", "Place1");
+
+            }
+            else {
+                Log.d("Place2", "Place2");
+                candidate="";
+                candidate = candidate + String.valueOf(idself);
+                Log.d("candidate Choix2",candidate);
+                dboh.OffreAjouteCandidat(idOffre,candidate);
+            }
+
+        }
+        else if(b1.getText().toString() == "Annuler"){
+            Log.d("Place3", "Place3");
+            b1.setText("Postuler");
+
+            String res = "";
             String candidate = off.getCandidate();
             Log.d("Postuler", candidate);
             boolean existe = false;
             if(candidate.isEmpty()==false){
                 Log.d("Postuler","non vide");
                 String[] split = candidate.split(";");
-                int idself = MainActivity.getLoginMemberID();
                 for (int i=0; i<split.length; i++){
-                    if(idself == Integer.parseInt(split[i])){
-                        existe = true;
+                    if(idself != Integer.parseInt(split[i])){
+                        res += split[i] + ";";
                     }
                 }
+                /*res = res.substring(0, res.length()-1);*/
+                if(res.isEmpty()||res==""){
+                    res ="null";
+                }
+                dboh.OffreAjouteCandidat(idOffre,res);
             }
 
-            if(candidate.isEmpty()) {
-                candidate = candidate + MainActivity.getLoginMemberID();
-                dboh.OffreAjouteCandidat(idOffre,candidate);
-            }
-            else if(existe==false){
-                candidate=candidate + ";" + MainActivity.getLoginMemberID();
-                dboh.OffreAjouteCandidat(idOffre,candidate);
-            }
-            Log.d("Postuler",candidate);
 
         }
         else{
             b1.setText("Postuler");
+            Log.d("Place4", "Place4");
         }
+
     }
 }

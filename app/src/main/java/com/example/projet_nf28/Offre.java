@@ -11,7 +11,7 @@ public class Offre {
     String adresse;
     String typeOffre;
     int author;
-    String candidate;
+    String candidate="-";
 
     public int getAuthor() {
         return author;

@@ -2,6 +2,7 @@ package com.example.projet_nf28;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,11 +24,14 @@ public class InfoEmployer extends AppCompatActivity {
         type = (RadioGroup) findViewById(R.id.radioGroupe);
 
         int idPerso = MainActivity.getLoginMemberID();
+        Log.d("InfoEmployer","idPerso");
         if(idPerso!=0){
             DBOpenHelper dboh = new DBOpenHelper();
             Employer emp = dboh.findUnEmployer(idPerso);
             //Toast.makeText(getApplicationContext(), "Test "+idPerso, Toast.LENGTH_SHORT).show();
-            certificat.setText(emp.getCertificat());
+            if(emp.getCertificat().isEmpty()==false){
+                certificat.setText(emp.getCertificat());
+            }
             //'Entreprise','Organisation','Collectivites','Particulier'
             RadioButton b;
             switch (emp.getType()){

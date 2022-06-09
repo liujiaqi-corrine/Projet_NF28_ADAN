@@ -35,7 +35,6 @@ public class ModifierUnOffre extends AppCompatActivity {
         b1  = (Button) findViewById(R.id.button8);
         b2  = (Button) findViewById(R.id.button6);
         b3  = (Button) findViewById(R.id.button18);
-        b4  = (Button) findViewById(R.id.button9);
 
         titre = (EditText) findViewById(R.id.editTextTextPersonName9);
         decscription = (EditText) findViewById(R.id.editTextTextPersonName13);
@@ -63,42 +62,45 @@ public class ModifierUnOffre extends AppCompatActivity {
             adresse.setText(off.getAdresse());
 
             if (off.getCandidate() == "" || off.getCandidate().isEmpty()) {
-                b4.setEnabled(false);
-                b4.setBackgroundColor(Color.GRAY);
+                b3.setEnabled(false);
+                b3.setBackgroundColor(Color.GRAY);
             }
-
-
-
         }
         else{
-            b4.setEnabled(false);
-            b4.setBackgroundColor(Color.GRAY);
+            b3.setEnabled(false);
+            b3.setBackgroundColor(Color.GRAY);
         }
 
         int id = MainActivity.getLoginMemberID();
-        dboh =  new DBOpenHelper();
-        User user =  dboh.findUnUser(id);
-
-        if(user.getIsEmployer() == 0){
-            b4.setEnabled(false);
-            b4.setBackgroundColor(Color.GRAY);
-        }
+        //dboh =  new DBOpenHelper();
 
         //pour le moment, on n'a pas cette fonction
-        b3.setEnabled(false);
-        b3.setBackgroundColor(Color.GRAY);
+        /*b3.setEnabled(false);
+        b3.setBackgroundColor(Color.GRAY);*/
 
-        b2.setEnabled(false);
-        b2.setBackgroundColor(Color.GRAY);
+        /*b2.setEnabled(false);
+        b2.setBackgroundColor(Color.GRAY);*/
 
     }
 
-
-    public void SauvegardEtRTrAMesOffres(View view) {
-        //a sauvegarder
-        //à choix à active si prorietaire
+    public void AChoisriCandidate(){
         Intent intent = new Intent(this, MesOffres.class);
         startActivity(intent);
+    }
+
+    public  void ModiferOffreEtOkAMesOffres(View view){
+        off.setTitre(titre.getText().toString());
+        off.setDescription(decscription.getText().toString());
+        off.setArgent(Integer.valueOf(argent.getText().toString()));
+        off.setRecurrence(recurrence.getText().toString());
+        off.setNbCandidate(Integer.valueOf(nbCandidate.getText().toString()));
+        off.setDurre(durre.getText().toString());
+        off.setAdresse(adresse.getText().toString());
+        dboh.ModiferOffre(off);
+
+        Intent intent = new Intent(this, MesOffres.class);
+        startActivity(intent);
+
     }
 
     public void RtrAMesOffres(View view) {
@@ -114,7 +116,7 @@ public class ModifierUnOffre extends AppCompatActivity {
         if(candidates.isEmpty()==false){
             String[] split = candidates.split(";");
             User candidate = dboh.findUnUser(Integer.valueOf(split[0]));
-            textContrat = author.getNom()+" "+author.getPrenom() + "et" +
+            textContrat = author.getNom()+" "+author.getPrenom() + " et " +
                     candidate.getNom() + " " + candidate.getPrenom() +
                     "\nva signer le contrat pour \nl'offre : " +  off.getTitre() +
                     "pour une duree \nde " + off.getDurre();
@@ -122,5 +124,14 @@ public class ModifierUnOffre extends AppCompatActivity {
         intent.putExtra("contenu",textContrat);
         intent.putExtra("idOffre",idOffre);
         startActivity(intent);
+    }
+
+    public void ChoisirCandidate(View view){
+        if(off.getCandidate().isEmpty()==false){
+            Intent intent = new Intent(this, ChoisirCandidate.class);
+            intent.putExtra("idOffre",idOffre);
+            startActivity(intent);
+        }
+
     }
 }
